@@ -11,3 +11,11 @@ Here are the steps for our POC:
 - Identify key noun phrases and their score confidence
 - Get sentiment
 - Get entities
+
+
+Resources:
+------------------------------------------------------------------------------------------------
+Developer Guide: https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-dg.pdf
+
+Agorize Hacker Platform: https://globalai.agorize.com/en/challenges/openbankinghackathon2018/
+
