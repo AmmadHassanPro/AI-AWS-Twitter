@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.the.scott.one.external.TwitterEO;
 import com.the.scott.one.utils.ServiceAuthUtil;
 import com.the.scott.one.utils.ServiceConstants;
 import com.the.scott.one.utils.ServiceUtil;
@@ -25,6 +26,10 @@ public class AwsComprehendServiceApplication {
 	
 	@Autowired
 	ServiceAuthUtil authUtil;
+	
+	@Autowired
+	static
+	TwitterEO twitterEO;
 
 	public static void main(String[] args) {
 		//SpringApplication.run(AwsComprehendServiceApplication.class, args);
@@ -63,9 +68,18 @@ public class AwsComprehendServiceApplication {
 	             System.out.println("code: " + code);
 	             chromeDriver.close();
 	             
+	             responseMap.clear();
 	             responseMap = ServiceAuthUtil.getTwitterAccessToken(authToken, code);
 	             String accessToken = responseMap.get(ServiceConstants.RESPONSE_MESSAGE);
-	             System.out.println("AccessToken: " + accessToken);
+	             String[] stuff = accessToken.split(",");
+	             System.out.println("stuff[0]: " + stuff[0] + " stuff[1]: " + stuff[1]);
+	             try {
+	            	 responseMap = TwitterEO.searchTwitterForString("#Discover", stuff[0], stuff[1]);
+	             } catch (Exception exception) {
+	            	 System.out.println("responseMap exception: " + exception.getMessage());
+	             }
+	             System.out.println("responseMap: " + responseMap.get(ServiceConstants.RESPONSE_MESSAGE));
+	             
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

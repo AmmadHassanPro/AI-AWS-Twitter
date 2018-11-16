@@ -30,7 +30,8 @@ import com.the.scott.one.utils.TwitterUtil;
 
 public class TwitterEO {
 	@Autowired
-	ServiceUtil serviceUtil;
+	static
+	ServiceUtil serviceUtil = new ServiceUtil();
 	
 	@Autowired
 	TwitterUtil twitterUtil;
@@ -149,6 +150,107 @@ public class TwitterEO {
 		
 		
 		
+		
+		return responseMap;
+	}
+
+	public static Map<String,String> searchTwitterForString(String id, String accessToken, String accessTokenSecret) throws ServiceException {
+		System.out.println("Enter searchTwitterForString");
+		// generate authorization header
+		String get = "GET";
+		String oauth_signature_method = "HMAC-SHA1";
+		System.out.println("Before computing signature1");
+		String oauth_nonce = serviceUtil.generateNonce(); // any relatively random alphanumeric string will work here
+		System.out.println("Before computing signature2");
+		String oauth_timestamp = serviceUtil.generateTimestamp(); // then divide by 1000 to get seconds
+		System.out.println("Before computing signature3");
+		// the parameter string must be in alphabetical order
+		// this time, I add 3 extra params to the request, "lang", "result_type" and "q".
+		String parameter_string = "id=" + id 
+								+ "&oauth_consumer_key=" + ServiceConstants.TWITTER_CONSUMER_KEY 
+								+ "&oauth_nonce=" + oauth_nonce 
+								+ "&oauth_signature_method=" + oauth_signature_method 
+								+ "&oauth_timestamp=" + oauth_timestamp 
+								+ "&oauth_token=" + serviceUtil.encode(accessToken) 
+								+ "&oauth_version=1.0";
+		System.out.println("Before computing signature4");
+		String twitter_endpoint = "https://api.twitter.com/1.1/search/tweets.json";
+		System.out.println("Before computing signature5");
+		String signature_base_string = get + "&"
+									 + serviceUtil.encode(twitter_endpoint) + "&" 
+									 + serviceUtil.encode(parameter_string);
+		System.out.println("Before computing signature6");
+		// this time the base string is signed using twitter_consumer_secret + "&" + encode(oauth_token_secret) instead of just twitter_consumer_secret + "&"
+		String oauth_signature = "";
+		try {
+			oauth_signature = serviceUtil.computeSignature(signature_base_string, 
+					ServiceConstants.TWITTER_CONSUMER_KEY  + "&" + serviceUtil.encode(accessTokenSecret));  // note the & at the end. Normally the user access_token would go here, but we don't know it yet for request_token
+		} catch (Exception e) {
+			throw serviceUtil.createServiceException(ServiceConstants.E100, "service exception while computing signature: " + e.getMessage());
+		}
+		
+		String authorization_header_string = "OAuth oauth_consumer_key=\"" + ServiceConstants.TWITTER_CONSUMER_KEY 
+										   + "\",oauth_signature_method=\"HMAC-SHA1\"," 
+										   + "oauth_timestamp=\"" + oauth_timestamp 
+										   + "\",oauth_nonce=\"" + oauth_nonce 
+										   + "\",oauth_version=\"1.0\"," 
+										   + "oauth_signature=\"" + serviceUtil.encode(oauth_signature) 
+										   + "\",oauth_token=\"" + serviceUtil.encode(accessToken) + "\"";
+		    
+		String url = twitter_endpoint; 
+		HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
+		CloseableHttpClient httpclient = httpClientBuilder.build();
+		HttpGet httpGet = null; 
+		httpGet = new HttpGet(url + "?id=" + id);
+
+		List<NameValuePair> headers = new ArrayList<NameValuePair>();	 										// create an empty list
+		NameValuePair authorizationPair = new BasicNameValuePair("Authorization", authorization_header_string);	// add the "Authorization" header with the string created above.
+		headers.add(authorizationPair);																			// add the pair to the list of headers
+		
+		// now loop the header pairs and add them to the post
+		NameValuePair current = null;
+		Iterator<NameValuePair> header_it = headers.iterator();
+		while(header_it.hasNext())
+		{
+			current = header_it.next();
+			System.out.println("Adding header " + current.getName() + ":" + current.getValue());
+			httpGet.setHeader(current.getName(), current.getValue());
+		}
+
+		// print request as we have it so far
+		System.out.println("\n**************");
+		System.out.println(httpGet.getRequestLine());
+		Header[] headers2 = httpGet.getAllHeaders();
+		int h = 0;
+		while(h < headers2.length)
+		{
+			System.out.println("name=" +headers2[h].getName() + " value=" + headers2[h].getValue());
+			h++;
+		}
+		System.out.println("\n**************");
+		
+		CloseableHttpResponse response = null;
+		try {
+			response = httpclient.execute(httpGet);
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Map<String,String> responseMap = new HashMap<String,String>();
+		responseMap.put(ServiceConstants.RESPONSE_STATUS, ServiceConstants.STATUS_ERROR);
+		
+		try {
+			String responseBody = EntityUtils.toString(response.getEntity());
+			System.out.println("Raw response: " + response.toString());
+			responseMap.put(ServiceConstants.RESPONSE_MESSAGE, responseBody);
+			responseMap.put(ServiceConstants.RESPONSE_STATUS, ServiceConstants.STATUS_OK);
+		} catch (Exception e) {
+			throw serviceUtil.createServiceException(ServiceConstants.E100, "Error while parsing response form search");
+		}
 		
 		return responseMap;
 	}

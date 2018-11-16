@@ -245,7 +245,30 @@ public class ServiceAuthUtil {
 			}
 			
 			String responseBody = EntityUtils.toString(response.getEntity());
-			responseMap.put(ServiceConstants.RESPONSE_MESSAGE, responseBody);
+			
+			String oauth_token = "";
+			String oauth_token_secret = "";
+			// using the tokenizer takes away the need for the values to be in any particular order.
+			StringTokenizer st = new StringTokenizer(responseBody, "&");
+			String currenttoken = "";
+			
+			while(st.hasMoreTokens()) {
+				currenttoken = st.nextToken();
+				if(currenttoken.startsWith("oauth_token="))
+					oauth_token = currenttoken.substring(currenttoken.indexOf("=") + 1);
+				else if(currenttoken.startsWith("oauth_token_secret="))
+					oauth_token_secret = currenttoken.substring(currenttoken.indexOf("=") + 1);
+				else if(currenttoken.startsWith("oauth_callback_confirmed=")) {
+					//oauth_callback_confirmed = currenttoken.substring(currenttoken.indexOf("=") + 1);
+				}
+			}
+			
+			if(oauth_token.equals("") || oauth_token_secret.equals("")) { // if either key is empty, that's weird and bad
+				responseMap.put(ServiceConstants.RESPONSE_MESSAGE, "oauth tokens in response were invalid");
+				return responseMap;
+			}
+			
+			responseMap.put(ServiceConstants.RESPONSE_MESSAGE, oauth_token+","+oauth_token_secret);
 			responseMap.put(ServiceConstants.RESPONSE_STATUS, ServiceConstants.STATUS_OK);
 			
 		} catch (Exception e) {
