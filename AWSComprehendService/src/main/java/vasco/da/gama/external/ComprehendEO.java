@@ -1,4 +1,4 @@
-package com.the.scott.one.external;
+package vasco.da.gama.external;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,8 +11,9 @@ import com.amazonaws.services.comprehend.AmazonComprehend;
 import com.amazonaws.services.comprehend.AmazonComprehendClientBuilder;
 import com.amazonaws.services.comprehend.model.DetectSentimentRequest;
 import com.amazonaws.services.comprehend.model.DetectSentimentResult;
-import com.the.scott.one.exceptions.ServiceException;
-import com.the.scott.one.utils.ServiceConstants;
+
+import vasco.da.gama.exceptions.ServiceException;
+import vasco.da.gama.utils.ServiceConstants;
 
 @Component
 public class ComprehendEO {

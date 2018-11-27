@@ -1,10 +1,10 @@
-package com.the.scott.one.utils;
+package vasco.da.gama.utils;
 
 import org.springframework.stereotype.Component;
 
 import com.amazonaws.services.comprehend.model.DetectSentimentResult;
 
-import the.scott.one.beans.GetOverallTwitterSentimentOutput;
+import vasco.da.gama.beans.GetOverallTwitterSentimentOutput;
 
 @Component
 public class ServiceMapperUtil {

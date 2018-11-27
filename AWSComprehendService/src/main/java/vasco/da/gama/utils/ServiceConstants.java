@@ -1,4 +1,4 @@
-package com.the.scott.one.utils;
+package vasco.da.gama.utils;
 
 public class ServiceConstants {
 	//Twitter

@@ -1,4 +1,4 @@
-package com.the.scott.one.utils;
+package vasco.da.gama.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -13,7 +13,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Component;
 
-import com.the.scott.one.exceptions.ServiceException;
+import vasco.da.gama.exceptions.ServiceException;
 
 @Component
 public class ServiceUtil {

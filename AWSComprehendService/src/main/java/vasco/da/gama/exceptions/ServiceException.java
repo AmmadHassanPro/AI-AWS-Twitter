@@ -1,4 +1,4 @@
-package com.the.scott.one.exceptions;
+package vasco.da.gama.exceptions;
 
 public class ServiceException extends Exception {
 

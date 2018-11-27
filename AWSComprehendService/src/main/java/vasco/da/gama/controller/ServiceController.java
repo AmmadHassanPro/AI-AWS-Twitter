@@ -1,4 +1,4 @@
-package the.scott.one.controller;
+package vasco.da.gama.controller;
 
 import java.net.URLEncoder;
 import org.slf4j.Logger;
@@ -9,11 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.the.scott.one.exceptions.ServiceException;
-import com.the.scott.one.utils.ServiceConstants;
-
-import the.scott.one.beans.GetOverallTwitterSentimentOutput;
-import the.scott.one.bo.ServiceBO;
+import vasco.da.gama.beans.GetOverallTwitterSentimentOutput;
+import vasco.da.gama.bo.ServiceBO;
+import vasco.da.gama.exceptions.ServiceException;
+import vasco.da.gama.utils.ServiceConstants;
 
 @Controller
 public class ServiceController {

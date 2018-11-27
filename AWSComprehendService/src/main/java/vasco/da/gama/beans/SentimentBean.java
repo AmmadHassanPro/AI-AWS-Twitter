@@ -1,4 +1,4 @@
-package the.scott.one.beans;
+package vasco.da.gama.beans;
 
 import com.amazonaws.services.comprehend.model.DetectSentimentResult;
 

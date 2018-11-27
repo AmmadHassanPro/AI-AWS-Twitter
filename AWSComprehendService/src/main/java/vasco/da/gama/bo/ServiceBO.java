@@ -1,4 +1,4 @@
-package the.scott.one.bo;
+package vasco.da.gama.bo;
 
 import java.util.ArrayList;
 
@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component;
 
 import com.amazonaws.services.comprehend.model.DetectSentimentResult;
 import com.amazonaws.services.comprehend.model.SentimentScore;
-import com.the.scott.one.exceptions.ServiceException;
-import com.the.scott.one.external.ComprehendEO;
-import com.the.scott.one.external.TwitterEO;
-import com.the.scott.one.utils.ServiceConstants;
-import com.the.scott.one.utils.ServiceMapperUtil;
 
-import the.scott.one.beans.GetOverallTwitterSentimentOutput;
-import the.scott.one.beans.SentimentBean;
+import vasco.da.gama.beans.GetOverallTwitterSentimentOutput;
+import vasco.da.gama.beans.SentimentBean;
+import vasco.da.gama.exceptions.ServiceException;
+import vasco.da.gama.external.ComprehendEO;
+import vasco.da.gama.external.TwitterEO;
+import vasco.da.gama.utils.ServiceConstants;
+import vasco.da.gama.utils.ServiceMapperUtil;
 
 @Component
 public class ServiceBO {

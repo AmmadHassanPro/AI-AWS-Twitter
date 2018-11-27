@@ -1,4 +1,4 @@
-package com.the.scott.one.external;
+package vasco.da.gama.external;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -21,9 +21,10 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.the.scott.one.exceptions.ServiceException;
-import com.the.scott.one.utils.ServiceConstants;
-import com.the.scott.one.utils.ServiceUtil;
+
+import vasco.da.gama.exceptions.ServiceException;
+import vasco.da.gama.utils.ServiceConstants;
+import vasco.da.gama.utils.ServiceUtil;
 @Component
 public class TwitterEO {
 	private static final Logger LOG = LoggerFactory.getLogger(TwitterEO.class);
