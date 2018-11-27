@@ -1,7 +1,6 @@
 package com.the.scott.one.utils;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.security.GeneralSecurityException;
 import java.util.Calendar;
@@ -12,9 +11,11 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.stereotype.Component;
 
 import com.the.scott.one.exceptions.ServiceException;
 
+@Component
 public class ServiceUtil {
 	public String encode(String value) {
         String encoded = null;
