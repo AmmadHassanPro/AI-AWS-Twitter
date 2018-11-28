@@ -2,9 +2,11 @@ package vasco.da.gama.beans;
 
 import java.io.Serializable;
 
+import com.amazonaws.services.comprehend.model.DetectEntitiesResult;
+import com.amazonaws.services.comprehend.model.DetectKeyPhrasesResult;
 import com.amazonaws.services.comprehend.model.DetectSentimentResult;
 
-public class GetOverallTwitterSentimentOutput implements Serializable {
+public class GetOverallTwitterFeelOutput implements Serializable {
 	
 	/**
 	 * 
@@ -12,9 +14,14 @@ public class GetOverallTwitterSentimentOutput implements Serializable {
 	private static final long serialVersionUID = 4430140588720558871L;
 	
 	private DetectSentimentResult overallSentiment;
+	private DetectEntitiesResult overallEntities;
+	private DetectKeyPhrasesResult overallKeyPhrases;
 	
-	public GetOverallTwitterSentimentOutput(DetectSentimentResult sentiment) {
+	public GetOverallTwitterFeelOutput(DetectSentimentResult sentiment, 
+			DetectEntitiesResult entities, DetectKeyPhrasesResult keyPhrases) {
 		setOverallSentiment(sentiment);
+		setOverallEntities(entities);
+		setOverallKeyPhrases(keyPhrases);
 	}
 
 	public DetectSentimentResult getOverallSentiment() {
@@ -25,6 +32,23 @@ public class GetOverallTwitterSentimentOutput implements Serializable {
 		this.overallSentiment = overallSentiment;
 	}
 	
+	public DetectEntitiesResult getOverallEntities() {
+		return overallEntities;
+	}
+
+	public void setOverallEntities(DetectEntitiesResult overallEntities) {
+		this.overallEntities = overallEntities;
+	}
+
+	public DetectKeyPhrasesResult getOverallKeyPhrases() {
+		return overallKeyPhrases;
+	}
+
+	public void setOverallKeyPhrases(DetectKeyPhrasesResult overallKeyPhrases) {
+		this.overallKeyPhrases = overallKeyPhrases;
+	}
+	
+	//TODO: update
 	@Override
 	public String toString() {
 		StringBuilder out = new StringBuilder();

@@ -7,20 +7,24 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.amazonaws.services.comprehend.model.DetectEntitiesResult;
+import com.amazonaws.services.comprehend.model.DetectKeyPhrasesResult;
 import com.amazonaws.services.comprehend.model.DetectSentimentResult;
-import com.amazonaws.services.comprehend.model.SentimentScore;
+import com.amazonaws.services.comprehend.model.KeyPhrase;
 
-import vasco.da.gama.beans.GetOverallTwitterSentimentOutput;
-import vasco.da.gama.beans.SentimentBean;
+import vasco.da.gama.beans.GetOverallTwitterFeelOutput;
 import vasco.da.gama.exceptions.ServiceException;
 import vasco.da.gama.external.ComprehendEO;
 import vasco.da.gama.external.TwitterEO;
 import vasco.da.gama.utils.ServiceConstants;
 import vasco.da.gama.utils.ServiceMapperUtil;
+import vasco.da.gama.utils.ServiceUtil;
 
 @Component
 public class ServiceBO {
 	private static final Logger LOG = LoggerFactory.getLogger(ServiceBO.class);
+	
+	int loop = 0;
 	
 	@Autowired
 	TwitterEO twitterEO;
@@ -31,58 +35,20 @@ public class ServiceBO {
 	@Autowired
 	ServiceMapperUtil mapperUtil;
 	
-	public GetOverallTwitterSentimentOutput getOverallSentiment(String id) throws ServiceException {
+	@Autowired
+	ServiceUtil serviceUtil;
+	
+	public GetOverallTwitterFeelOutput getOverallSentiment(String searchString) throws ServiceException {
 		LOG.info("Enter getOverallSentiment");
-		ArrayList<SentimentBean> sentimentList = new ArrayList<>();
-		DetectSentimentResult overallSentiment = new DetectSentimentResult();
-		SentimentScore score = new SentimentScore();
-		overallSentiment.setSentimentScore(score);
-		
-		Float totPositive = new Float(0.00);
-		Float totNeutral = new Float(0.00);
-		Float totMixed = new Float(0.00);
-		Float totNegative = new Float(0.00);
+		DetectSentimentResult overallSentiment = null;
+		DetectEntitiesResult overallEntities = null;
+		DetectKeyPhrasesResult overallKeyPhrases = null;
 		
 		try {
-			twitterEO.getBearerToken();
-			ArrayList<String> tweets = twitterEO.searchTwitterForString("@Discover");
-			
-			for(int i = 0; i <tweets.size(); i++) {
-				String tweet = tweets.get(i);
-				SentimentBean sentBean = new SentimentBean(tweet, comprehendEO.getSentiment(tweet));
-				sentimentList.add(sentBean);
-				totPositive += sentBean.getSentiment().getSentimentScore().getPositive();
-				totNeutral += sentBean.getSentiment().getSentimentScore().getNeutral();
-				totMixed += sentBean.getSentiment().getSentimentScore().getMixed();
-				totNegative += sentBean.getSentiment().getSentimentScore().getNegative();
-			}
-			Float numTweets = new Float(tweets.size());
-			Float overallPositive = totPositive/numTweets;
-			Float overallNeutral = totNeutral/numTweets;
-			Float overallMixed = totMixed/numTweets;
-			Float overallNegative = totNegative/numTweets;
-			
-			overallSentiment.getSentimentScore().setPositive(overallPositive);
-			overallSentiment.getSentimentScore().setNeutral(overallNeutral);
-			overallSentiment.getSentimentScore().setMixed(overallMixed);
-			overallSentiment.getSentimentScore().setNegative(overallNegative);
-			
-			Float highest = overallSentiment.getSentimentScore().getPositive();
-			overallSentiment.setSentiment("POSITIVE");
-			if (overallSentiment.getSentimentScore().getNeutral() > highest) {
-				highest = overallSentiment.getSentimentScore().getNeutral();
-				overallSentiment.setSentiment("NEUTRAL");
-			}
-			if (overallSentiment.getSentimentScore().getMixed() > highest) {
-				highest = overallSentiment.getSentimentScore().getMixed();
-				overallSentiment.setSentiment("MIXED");
-			}
-			if (overallSentiment.getSentimentScore().getNegative() > highest) {
-				highest = overallSentiment.getSentimentScore().getNegative();
-				overallSentiment.setSentiment("NEGATIVE");
-			}
-
-			
+			ArrayList<String> tweets = twitterEO.searchTwitterForString(searchString);
+			overallSentiment = serviceUtil.calcOverallSentiment(comprehendEO.getBatchSentiment(tweets));
+			overallEntities = serviceUtil.calcOverallEntities(comprehendEO.getBatchEntities(tweets));
+			overallKeyPhrases = serviceUtil.calcOverallKeyPhrases(comprehendEO.getBatchKeyPhrases(tweets));
 		} catch (ServiceException e) { throw e; } 
 		catch (Exception e) {
 			e.printStackTrace();
@@ -90,7 +56,23 @@ public class ServiceBO {
 		}
 		
 		LOG.info("Exit getOverallSentiment");
-		return mapperUtil.populateOverallSentimentOutput(overallSentiment);
+		return mapperUtil.populateOverallSentimentOutput(overallSentiment, overallEntities, overallKeyPhrases);
+	}
+	
+	private DetectKeyPhrasesResult distillKeyPhrases(DetectKeyPhrasesResult overallKeyPhrases) {
+		LOG.info("Enter distillKeyPhrases");
+		StringBuilder allPhrases = new StringBuilder();
+		for (KeyPhrase keyPhrase : overallKeyPhrases.getKeyPhrases()) {
+			allPhrases.append(keyPhrase.getText());
+			allPhrases.append(" ");
+		}
+		DetectKeyPhrasesResult distilledKeyPhrases = comprehendEO.getSingleKeyPhrase(allPhrases.toString());
+		if (distilledKeyPhrases.getKeyPhrases().size() > 10 && loop < 4) {
+			loop++;
+			distillKeyPhrases(distilledKeyPhrases);
+		}
+		LOG.info("Exit distillKeyPhrases");
+		return distilledKeyPhrases; 
 	}
 
 }

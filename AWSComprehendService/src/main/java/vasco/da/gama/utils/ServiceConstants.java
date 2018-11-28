@@ -12,6 +12,10 @@ public class ServiceConstants {
 	public static String TWITTER_BEARER_TOKEN_ENDPOINT = "https://api.twitter.com/oauth2/token";
 	public static String TWITTER_SEARCH_ENDPOINT = "https://api.twitter.com/1.1/search/tweets.json";
 	public static String TWITTER_BEARER_TOKEN = "";
+	// Amazon max batch size is 25
+	public static String TWEET_COUNT = "25";
+	
+	public static String LANG = "en";
 	
 	//Amazon
 	public static String AMAZON_API_KEY_KEY = "aws.accessKeyId";

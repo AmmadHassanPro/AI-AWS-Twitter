@@ -35,15 +35,15 @@ public class TwitterEO {
 	/**
 	 * Searches Twitter for the given ID and returns an ArrayList of the tweet bodies
 	 * 
-	 * @param id
+	 * @param searchString
 	 * @return ArrayList<String> tweets
 	 * @throws ServiceException
 	 */
-	public ArrayList<String> searchTwitterForString(String id) throws ServiceException {
+	public ArrayList<String> searchTwitterForString(String searchString) throws ServiceException {
 		LOG.info("Enter searchTwitterForString");
 		
 		if (ServiceConstants.TWITTER_BEARER_TOKEN == null || ServiceConstants.TWITTER_BEARER_TOKEN.isEmpty()) {
-			throw new ServiceException("Missing Bearer Token for Twitter Search call", ServiceConstants.E100);
+			getBearerToken();
 		}
 
 		String url = ServiceConstants.TWITTER_SEARCH_ENDPOINT; 
@@ -57,7 +57,9 @@ public class TwitterEO {
 		
 		CloseableHttpResponse response = null;
 		try {
-			httpGet = new HttpGet(url + "?q=" + URLEncoder.encode(id, "UTF-8"));
+			httpGet = new HttpGet(url + "?lang=" + ServiceConstants.LANG + 
+										"&count=" + ServiceConstants.TWEET_COUNT + 
+										"&q=" + URLEncoder.encode(searchString, "UTF-8"));
 			LOG.debug("Bearer token retrieved: {}", ServiceConstants.TWITTER_BEARER_TOKEN);
 			httpGet.setHeader("Authorization", "Bearer " + ServiceConstants.TWITTER_BEARER_TOKEN);
 			
@@ -91,7 +93,7 @@ public class TwitterEO {
 	 * 
 	 * @throws ServiceException
 	 */
-	public void getBearerToken() throws ServiceException {
+	private void getBearerToken() throws ServiceException {
 		LOG.info("Enter getBearerToken");
 		HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
 		CloseableHttpClient httpclient = httpClientBuilder.build();
