@@ -1,9 +1,16 @@
-package com.the.scott.one.exceptions;
+package vasco.da.gama.exceptions;
 
 public class ServiceException extends Exception {
 
 	private static final long serialVersionUID = 7024609414327624720L;
 	private String message;
+	
+	public ServiceException() {}
+	
+	public ServiceException(String message, String errorCode) {
+		setMessage(message);
+		setErrorCode(errorCode);
+	}
 	
 	public String getMessage() {
 		return message;
