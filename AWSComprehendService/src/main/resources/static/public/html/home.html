@@ -5,12 +5,19 @@
     <title>insights</title>
     <!--Meyers Reset removes default browser styles -->
     <link href="/public/css/meyerreset.css" rel="stylesheet" type="text/css"/>
+
+    <script src="/public/js/home.js"></script>
+    <script src="/public/js/twitterSentiment.js"></script>
   </head>
   <body>
-    <h1>insights <small>- high level analysis of social media</small></h1>
+    <h1>insights <small>- realtime high level AI analysis of social media subjects</small></h1>
     <div id="search-form">
-      search term: <input type="text" name="searchString">
+      search term: <input id="term-input" type="text" name="searchString" value="DiscoverFinancial">
       <button onclick="searchTerm()">search</button>
+    </div>
+    <div id="display-search-term">
+      results for the term: <span id="search-term"></span><br>
+      overall sentiment is: <span id="overall-sentiment"></span>
     </div>
   </body>
 </html>
