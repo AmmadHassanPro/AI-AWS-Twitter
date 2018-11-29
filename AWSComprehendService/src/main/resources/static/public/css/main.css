@@ -21,6 +21,8 @@ header {
     color: yellow;
     font-weight: bold;
     border-radius: 10px; }
+    #search-form button:hover {
+      cursor: pointer; }
 
 #display-search-term {
   margin-left: 20px;
@@ -32,23 +34,34 @@ header {
 #lists {
   display: none;
   margin-top: 10px;
+  margin-left: 20px;
+  margin-bottom: 30px;
   width: 85%;
   height: 300px;
-  border: 3px solid red; }
+  border: 3px solid black; }
   #lists .list-title {
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: sans-serif;
     font-weight: bold;
+    border-radius: 50%;
+    background-color: darkblue;
+    color: white;
     height: 10%;
-    width: 100%;
-    border: 3px solid red; }
+    width: 99%;
+    border: 5px groove black; }
   #lists #key-phrases {
     height: 100%;
     width: 50%;
-    border: 2px solid blue; }
+    border: 2px solid black; }
+    #lists #key-phrases #key-phrases-list {
+      height: 85%;
+      width: 100%; }
   #lists #key-entities {
     height: 100%;
     width: 50%;
-    border: 2px solid blue; }
+    border: 2px solid black; }
+    #lists #key-entities #key-entities-list {
+      height: 85%;
+      width: 100%; }
