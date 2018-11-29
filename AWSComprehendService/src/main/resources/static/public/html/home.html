@@ -12,13 +12,15 @@
     <script src="/public/js/twitterSentiment.js"></script>
   </head>
   <body>
-    <h1>insights <small>- realtime high level AI analysis of social media subjects</small></h1>
+    <header>
+      <h1>insights <small>- realtime high level AI analysis of social media subjects</small></h1>
+    </header>
     <div id="search-form">
       search term: <input id="term-input" type="text" name="searchString" value="DiscoverFinancial">
       <button onclick="searchTerm()">search</button>
     </div>
     <div id="display-search-term">
-      results for the term: <span id="search-term"></span><br>
+      results for the term: <span id="search-term"></span><br><br>
       overall sentiment is: <span id="overall-sentiment"></span>
     </div>
     <div id="twitter-charts">
