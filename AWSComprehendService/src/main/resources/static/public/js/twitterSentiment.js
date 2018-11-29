@@ -1,10 +1,36 @@
 
-function createSentimentChart(data) {
+function createSentimentChart(sentimentData) {
+  google.charts.load('current', {packages: ['corechart', 'bar']});
+  google.charts.setOnLoadCallback(drawBarColors);
 
+  function drawBarColors() {
+    console.log("inside droBar colors");
+    console.log(sentimentData);
+    var posWithNum = "positive - " + sentimentData.positive;
+    var negWithNum = "negative - " + sentimentData.negative;
+    var data = google.visualization.arrayToDataTable([
+      ['sentiment', posWithNum, negWithNum],
+      ['public opinion', sentimentData.positive, sentimentData.negative]
+    ]);
+
+    var options = {
+      title: 'visual ratio between negative and positive sentiment',
+      chartArea: {width: '50%'},
+      colors: ['#b0120a', '#ffab91'],
+      hAxis: {
+        title: 'sentiment percentage',
+        minValue: 0
+      },
+      vAxis: {
+        title: 'sentiment'
+      }
+    };
+    var chart = new google.visualization.BarChart(document.getElementById('sentiment-chart'));
+    chart.draw(data, options);
+  }
 }
 
-function createApathyChart(data) {
-  var sentimentData = data.overallSentiment.sentimentScore;
+function createApathyChart(sentimentData) {
   google.charts.load('current', {'packages':['corechart']});
   google.charts.setOnLoadCallback(drawChart);
   function drawChart() {
@@ -41,7 +67,9 @@ function populateTwitterData(searchTerm) {
       //display overall sentiment
       document.getElementById("overall-sentiment").innerHTML = data.overallSentiment.sentiment;
 
-      createApathyChart(data);
+      var sentimentData = data.overallSentiment.sentimentScore;
+      createApathyChart(sentimentData);
+      createSentimentChart(sentimentData);
     }
   };
   //TODO: update with prod url
