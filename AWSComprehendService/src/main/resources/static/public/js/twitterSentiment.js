@@ -4,8 +4,6 @@ function createSentimentChart(sentimentData) {
   google.charts.setOnLoadCallback(drawBarColors);
 
   function drawBarColors() {
-    console.log("inside droBar colors");
-    console.log(sentimentData);
     var posWithNum = "positive - " + sentimentData.positive;
     var negWithNum = "negative - " + sentimentData.negative;
     var data = google.visualization.arrayToDataTable([
