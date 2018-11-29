@@ -5,6 +5,5 @@ function searchTerm() {
   //display currently searched term
   document.getElementById("search-term").innerHTML = searchTerm;
 
-  //search twitter
   populateTwitterData(searchTerm);
 }
