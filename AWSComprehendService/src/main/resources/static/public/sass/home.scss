@@ -65,8 +65,13 @@ header {
         width: 50%;
         border: 2px solid black;
         #key-phrases-list {
+            overflow: scroll;
+            font-family: sans-serif;
             height: 85%;
             width: 100%;
+            ul li {
+                margin: 5px;
+            }
         }
     }
     #key-entities {
@@ -74,8 +79,13 @@ header {
         width: 50%;
         border: 2px solid black;
         #key-entities-list {
+            overflow: scroll;
+            font-family: sans-serif;
             height: 85%;
             width: 100%;
+            ul li {
+                margin: 5px;
+            }
         }
     }
 }    

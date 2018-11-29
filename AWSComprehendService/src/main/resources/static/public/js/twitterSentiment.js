@@ -1,5 +1,10 @@
 
 function createKeyPhraseList(keyPhrases){
+  //first remove any previous child li
+  var ulNode = document.getElementById('phrase-ul');
+  while(ulNode.firstChild) {
+    ulNode.removeChild(ulNode.firstChild);
+  }
   for (i = 1; i <= keyPhrases.length; i++) {
     var node = document.createElement("LI");
     var textNode = document.createTextNode(i + ") " + keyPhrases[(i-1)].text);
@@ -9,6 +14,11 @@ function createKeyPhraseList(keyPhrases){
 }
 
 function createKeyEntityList(keyEntities) {
+  //first remove any previous child li
+  var ulNode = document.getElementById('entities-ul');
+  while(ulNode.firstChild) {
+    ulNode.removeChild(ulNode.firstChild);
+  }
   for (i = 1; i <= keyEntities.length; i++) {
     var node = document.createElement("LI");
     var textNode = document.createTextNode(i + ") " + keyEntities[(i-1)].text);
@@ -82,14 +92,12 @@ function populateTwitterData(searchTerm) {
       data = JSON.parse(this.responseText);
       //display overall sentiment
       document.getElementById("overall-sentiment").innerHTML = data.overallSentiment.sentiment;
-      console.log(data);
       var sentimentData = data.overallSentiment.sentimentScore;
       createApathyChart(sentimentData);
       createSentimentChart(sentimentData);
       var keyPhrases = data.overallKeyPhrases.keyPhrases;
       createKeyPhraseList(keyPhrases)
       var keyEntities = data.overallEntities.entities;
-      console.log(keyEntities[0].text);
       createKeyEntityList(keyEntities)
     }
   };

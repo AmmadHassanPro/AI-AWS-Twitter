@@ -56,12 +56,20 @@ header {
     width: 50%;
     border: 2px solid black; }
     #lists #key-phrases #key-phrases-list {
+      overflow: scroll;
+      font-family: sans-serif;
       height: 85%;
       width: 100%; }
+      #lists #key-phrases #key-phrases-list ul li {
+        margin: 5px; }
   #lists #key-entities {
     height: 100%;
     width: 50%;
     border: 2px solid black; }
     #lists #key-entities #key-entities-list {
+      overflow: scroll;
+      font-family: sans-serif;
       height: 85%;
       width: 100%; }
+      #lists #key-entities #key-entities-list ul li {
+        margin: 5px; }
