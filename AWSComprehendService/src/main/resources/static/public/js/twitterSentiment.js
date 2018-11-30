@@ -13,20 +13,6 @@ function createKeyPhraseList(keyPhrases){
   }
 }
 
-function createKeyEntityList(keyEntities) {
-  //first remove any previous child li
-  var ulNode = document.getElementById('entities-ul');
-  while(ulNode.firstChild) {
-    ulNode.removeChild(ulNode.firstChild);
-  }
-  for (i = 1; i <= keyEntities.length; i++) {
-    var node = document.createElement("LI");
-    var textNode = document.createTextNode(i + ") " + keyEntities[(i-1)].text);
-    node.appendChild(textNode);
-    document.getElementById('entities-ul').appendChild(node);
-  }
-}
-
 function createSentimentChart(sentimentData) {
   google.charts.load('current', {packages: ['corechart', 'bar']});
   google.charts.setOnLoadCallback(drawBarColors);
@@ -97,8 +83,6 @@ function populateTwitterData(searchTerm) {
       createSentimentChart(sentimentData);
       var keyPhrases = data.overallKeyPhrases.keyPhrases;
       createKeyPhraseList(keyPhrases)
-      var keyEntities = data.overallEntities.entities;
-      createKeyEntityList(keyEntities)
     }
   };
   //TODO: update with prod url

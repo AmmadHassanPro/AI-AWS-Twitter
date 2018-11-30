@@ -38,7 +38,7 @@ header {
   margin-bottom: 30px;
   width: 85%;
   height: 300px;
-  border: 3px solid black; }
+  /* border: 3px solid black; */ }
   #lists .list-title {
     display: flex;
     justify-content: center;
