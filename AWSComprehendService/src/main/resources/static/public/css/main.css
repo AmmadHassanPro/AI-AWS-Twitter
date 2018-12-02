@@ -31,15 +31,23 @@ header {
     color: darkblue;
     font-weight: bold; }
 
-#lists {
+#key-phrases {
   display: none;
+  flex-direction: column;
   margin-top: 10px;
   margin-left: 20px;
   margin-bottom: 30px;
-  width: 85%;
+  width: 30%;
   height: 300px;
   border: 3px solid black; }
-  #lists .list-title {
+  #key-phrases #key-phrases-list {
+    overflow: scroll;
+    font-family: sans-serif;
+    height: 85%;
+    width: 100%; }
+    #key-phrases #key-phrases-list ul li {
+      margin: 5px; }
+  #key-phrases .list-title {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -51,25 +59,3 @@ header {
     height: 10%;
     width: 99%;
     border: 5px groove black; }
-  #lists #key-phrases {
-    height: 100%;
-    width: 50%;
-    border: 2px solid black; }
-    #lists #key-phrases #key-phrases-list {
-      overflow: scroll;
-      font-family: sans-serif;
-      height: 85%;
-      width: 100%; }
-      #lists #key-phrases #key-phrases-list ul li {
-        margin: 5px; }
-  #lists #key-entities {
-    height: 100%;
-    width: 50%;
-    border: 2px solid black; }
-    #lists #key-entities #key-entities-list {
-      overflow: scroll;
-      font-family: sans-serif;
-      height: 85%;
-      width: 100%; }
-      #lists #key-entities #key-entities-list ul li {
-        margin: 5px; }

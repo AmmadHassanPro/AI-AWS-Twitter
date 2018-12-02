@@ -39,14 +39,23 @@ header {
         font-weight: bold;
     }
 }
-#lists {
+#key-phrases {
     display: none;
+    flex-direction: column;
     margin-top: 10px;
     margin-left: 20px;
     margin-bottom: 30px;
-    width: 85%;
+    width: 30%;
     height: 300px;
-    border: 3px solid black;
+    #key-phrases-list {
+        overflow: scroll;
+        font-family: sans-serif;
+        height: 85%;
+        width: 100%;
+        ul li {
+            margin: 5px;
+        }
+    }   border: 3px solid black;
     .list-title{
         display: flex;
         justify-content: center;
@@ -60,34 +69,4 @@ header {
         width: 99%;
         border: 5px groove black;
     }
-    #key-phrases {
-        height: 100%;
-        width: 50%;
-        border: 2px solid black;
-        #key-phrases-list {
-            overflow: scroll;
-            font-family: sans-serif;
-            height: 85%;
-            width: 100%;
-            ul li {
-                margin: 5px;
-            }
-        }
-    }
-    #key-entities {
-        height: 100%;
-        width: 50%;
-        border: 2px solid black;
-        #key-entities-list {
-            overflow: scroll;
-            font-family: sans-serif;
-            height: 85%;
-            width: 100%;
-            ul li {
-                margin: 5px;
-            }
-        }
-    }
-}    
-
-
+}
