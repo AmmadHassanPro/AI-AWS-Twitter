@@ -85,7 +85,7 @@ function populateTwitterData(searchTerm) {
       createKeyPhraseList(keyPhrases)
 
       hideSpinner();
-      
+
       //display content after recieved
       showTwitterResults();
     }

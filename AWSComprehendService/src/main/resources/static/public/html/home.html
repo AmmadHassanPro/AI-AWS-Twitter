@@ -23,14 +23,22 @@
       </div>
     </header>
 
-    <div id="search-form">
-      search term: <input id="term-input" type="text" name="searchString" value="DiscoverCard">
-      <button onclick="searchTerm()">search</button>
+    <div id="info-div">
+      <div id="search-form">
+        <fieldset>
+          <legend>search term</legend>
+          <input id="term-input" type="text" name="searchString" value="DiscoverCard">
+          <button onclick="searchTerm()">search</button>
+        </fieldset>
+      </div>
+      <div id="display-search-term">
+        results for the term: <span id="search-term-show"></span><br><br>
+      </div>
+      <div id="display-overall-sentiment">
+        overall sentiment is: <span id="overall-sentiment"></span>
+      </div>
     </div>
-    <div id="display-search-term">
-      results for the term: <span id="search-term-show"></span><br><br>
-      overall sentiment is: <span id="overall-sentiment"></span>
-    </div>
+
     <div id="twitter-charts">
       <div id="sentiment-chart"></div>
       <div id="apathy-chart"></div>
