@@ -3,18 +3,27 @@
   border: 1px solid red; }
 
 header {
+  display: flex;
+  flex-flow: column;
   height: 10vh;
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center; }
-  header h1 {
-    font-size: 2em;
-    font-weight: bold;
-    font-family: sans-serif; }
-    header h1 small {
-      font-weight: lighter;
-      font-size: .90em; }
+  align-items: center;
+  background-color: #213964;
+  color: #b6bdc2;
+  text-shadow: 1px 1px 1px black, 0 0 1em #888888, 0 0 0.2em #888888;
+  border-bottom: 2px solid black;
+  box-shadow: 0px 5px 8px #888888; }
+  header div h1 {
+    font-size: 2.5em;
+    font-family: 'Vast Shadow', sans-serif; }
+    header div h1 #title-letter-spacing {
+      letter-spacing: 40px; }
+  header div small {
+    font-weight: lighter;
+    font-family: 'Bungee Inline', sans-serif;
+    font-size: .90em; }
 
 #search-form {
   font-family: sans-serif;
