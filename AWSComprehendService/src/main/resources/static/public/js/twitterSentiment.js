@@ -84,6 +84,8 @@ function populateTwitterData(searchTerm) {
       var keyPhrases = data.overallKeyPhrases.keyPhrases;
       createKeyPhraseList(keyPhrases)
 
+      hideSpinner();
+      
       //display content after recieved
       showTwitterResults();
     }

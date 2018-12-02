@@ -1,3 +1,4 @@
+@import 'colors';
 
 header {
     height: 10vh;
@@ -71,4 +72,51 @@ header {
         color: white;
                 border: 5px groove black;
     }
+}
+
+.modal {
+    display: block;
+    visibility: hidden;
+    opacity: 0.0;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.8);
+    .modal-content {
+        width: 30%;
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        flex-flow: column;
+        margin: 15% auto;
+        padding: 20px;
+        border: 3px ridge;
+        border-radius: 25px;
+        background-color: $dark-background-color;
+        font-family: sans-serif;
+        color: $dark-lighttext-color;
+        img {
+            height: 150px;
+        }
+    }
+}
+
+// show/hide spa actions +===}========>
+.show {
+  visibility: visible;
+  transition: opacity 0.5s ease;
+  -webkit-transition-delay: .75s;
+  transition-delay: .75s;
+  opacity: 1;
+}
+
+.hide {
+  transition: visibility 0s ease 0.5s, opacity 0.5s ease;
+  opacity: 0;
+  visibility: hidden;
 }
