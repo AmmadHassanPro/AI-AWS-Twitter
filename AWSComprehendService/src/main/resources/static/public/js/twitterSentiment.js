@@ -76,15 +76,16 @@ function populateTwitterData(searchTerm) {
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       data = JSON.parse(this.responseText);
-      //display overall sentiment
+
       document.getElementById("overall-sentiment").innerHTML = data.overallSentiment.sentiment;
       var sentimentData = data.overallSentiment.sentimentScore;
       createApathyChart(sentimentData);
       createSentimentChart(sentimentData);
       var keyPhrases = data.overallKeyPhrases.keyPhrases;
       createKeyPhraseList(keyPhrases)
-      var keyEntities = data.overallEntities.entities;
-      createKeyEntityList(keyEntities)
+
+      //display content after recieved
+      showTwitterResults();
     }
   };
   //TODO: update with prod url
