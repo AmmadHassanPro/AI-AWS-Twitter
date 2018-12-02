@@ -1,16 +1,20 @@
 
+function getSearchTerm() {
+  return document.getElementById('term-input').value;
+}
+
 function searchTerm() {
   showSpinner();
 
-  var searchTerm = document.getElementById('term-input').value;
-
-  var searchTermDisplay = document.getElementById("search-term");
-  searchTermDisplay.innerHTML = searchTerm;
+  var searchTerm = getSearchTerm();
   populateTwitterData(searchTerm);
 }
 
 function showTwitterResults() {
   document.getElementById('key-phrases').style.display = "flex";
+  var searchTerm = getSearchTerm();
+  var searchTermDisplay = document.getElementById('search-term-show');
+  searchTermDisplay.innerHTML = searchTerm;
 }
 
 function showSpinner() {

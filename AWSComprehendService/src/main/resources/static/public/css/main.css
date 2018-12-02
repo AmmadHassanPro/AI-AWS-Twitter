@@ -1,4 +1,7 @@
 /*used*/
+* {
+  border: 1px solid red; }
+
 header {
   height: 10vh;
   width: 100%;
