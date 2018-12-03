@@ -34,7 +34,7 @@ header {
   display: flex;
   flex-flow: row;
   height: 10vh;
-  margin: 20px;
+  margin: 10px;
   border: 5px groove;
   border-radius: 10px;
   #search-form {
@@ -90,15 +90,25 @@ header {
   }
 }
 
-#key-phrases {
+.hide-div {
+  display: flex;
+  visibility: hidden;
+  opacity: 0.0;
+}
+#phrase-sentiment-div {
+  justify-content: space-around;
+  border: 5px groove;
+  margin: 0px 20px 5px 20px;
+  border-radius: 25px;
+  padding: 10px;
+  #key-phrases {
     width: 30%;
     height: 300px;
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10px;
-    margin-left: 20px;
-    margin-bottom: 30px;
+    border: 3px groove black;
+    border-radius: 10px 10px 0px 0px;
         #key-phrases-list {
         height: 85%;
         width: 100%;
@@ -107,7 +117,7 @@ header {
                 ul li {
             margin: 5px;
         }
-    }   border: 3px solid black;
+    }
     .list-title{
         height: 10%;
         width: 90%;
@@ -122,6 +132,20 @@ header {
         color: white;
                 border: 5px groove black;
     }
+  }
+}
+
+#twitter-charts{
+  display: flex;
+  height: 20vh;
+  justify-content: space-around;
+  border: 5px groove;
+  margin: 0px 20px 10px 20px;
+  border-radius: 25px;
+  #sentiment-chart {
+    width: 90%;
+    height: 100%;
+  }
 }
 
 .modal {

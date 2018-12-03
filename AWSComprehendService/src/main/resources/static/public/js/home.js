@@ -11,7 +11,7 @@ function searchTerm() {
 }
 
 function showTwitterResults() {
-  document.getElementById('key-phrases').style.display = "flex";
+  document.getElementById('phrase-sentiment-div').classList.add('show');
   var searchTerm = getSearchTerm();
   var searchTermDisplay = document.getElementById('search-term-show');
   searchTermDisplay.innerHTML = searchTerm;
