@@ -47,7 +47,7 @@ public class ServiceBO {
 		try {
 			ArrayList<String> tweets = twitterEO.searchTwitterForString(searchString);
 			overallSentiment = serviceUtil.calcOverallSentiment(comprehendEO.getBatchSentiment(tweets));
-			overallEntities = serviceUtil.calcOverallEntities(comprehendEO.getBatchEntities(tweets));
+			//overallEntities = serviceUtil.calcOverallEntities(comprehendEO.getBatchEntities(tweets));
 			overallKeyPhrases = serviceUtil.calcOverallKeyPhrases(comprehendEO.getBatchKeyPhrases(tweets));
 		} catch (ServiceException e) { throw e; } 
 		catch (Exception e) {

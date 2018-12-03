@@ -84,6 +84,17 @@ header {
   visibility: hidden;
   opacity: 0.0; }
 
+<<<<<<< HEAD
+#lists {
+  display: none;
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-bottom: 30px;
+  width: 85%;
+  height: 300px;
+  /* border: 3px solid black; */ }
+  #lists .list-title {
+=======
 #phrase-sentiment-div {
   justify-content: space-around;
   border: 5px groove;
@@ -95,6 +106,7 @@ header {
   #phrase-sentiment-div #key-phrases {
     width: 30%;
     height: 300px;
+>>>>>>> 622cb60c295fb8d9c97cac95cba570924b73a8b0
     display: flex;
     flex-direction: column;
     align-items: center;

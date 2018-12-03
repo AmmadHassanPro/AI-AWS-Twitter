@@ -2,8 +2,15 @@ package vasco.da.gama.utils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
@@ -104,6 +111,41 @@ public class ServiceUtil {
 			overallKeyPhrases.getKeyPhrases().addAll(resultKeyPhrase.getKeyPhrases());
 		}
 		
+		Map<String, Integer> occurences = new HashMap<>();
+		for (KeyPhrase phrase : overallKeyPhrases.getKeyPhrases()) {
+			String curText = phrase.getText();
+			if (occurences.containsKey(curText)) {
+				occurences.replace(curText, occurences.get(curText)+1);
+			} else {
+				occurences.put(curText, 0);
+			}
+		}
+		
+		Map<String, Integer> sortedByOccurences = sortByValue(occurences, false);
+		
+		List<KeyPhrase> sortedKeyPhrases = new ArrayList<>();
+		for (Map.Entry<String, Integer> entry : sortedByOccurences.entrySet()) {
+			KeyPhrase phrase = new KeyPhrase();
+			phrase.setText(entry.getKey());
+			phrase.setScore(new Float(entry.getValue()));
+			
+			sortedKeyPhrases.add(phrase);
+		}
+		overallKeyPhrases.setKeyPhrases(sortedKeyPhrases);
 		return overallKeyPhrases;
 	}
+	
+	private static Map<String, Integer> sortByValue(Map<String, Integer> unsortMap, final boolean order)
+    {
+        List<Entry<String, Integer>> list = new LinkedList<>(unsortMap.entrySet());
+
+        // Sorting the list based on values
+        list.sort((o1, o2) -> order ? o1.getValue().compareTo(o2.getValue()) == 0
+                ? o1.getKey().compareTo(o2.getKey())
+                : o1.getValue().compareTo(o2.getValue()) : o2.getValue().compareTo(o1.getValue()) == 0
+                ? o2.getKey().compareTo(o1.getKey())
+                : o2.getValue().compareTo(o1.getValue()));
+        return list.stream().collect(Collectors.toMap(Entry::getKey, Entry::getValue, (a, b) -> b, LinkedHashMap::new));
+
+    }
 }

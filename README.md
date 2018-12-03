@@ -1,4 +1,4 @@
-# AI-AWS-Twitter
+﻿# AI-AWS-Twitter
 Using Twitters API to get tweets with a banking # and feeding the tweets into Amazon Comprehend to perform the following:
 
 1) Detect the named entities, we are able to find out who and what people are talking about, within the banking domain. 
@@ -11,3 +11,6 @@ Resources:
 Developer Guide: https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-dg.pdf
 
 Agorize Hacker Platform: https://globalai.agorize.com/en/challenges/openbankinghackathon2018/
+<<<<<<< HEAD
+=======
+>>>>>>> aced5f5dd52078b55e835ec88d1989eca4b301f9

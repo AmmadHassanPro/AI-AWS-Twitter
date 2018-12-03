@@ -81,11 +81,9 @@ function populateTwitterData(searchTerm) {
       createSentimentChart(sentimentData);
       var keyPhrases = data.overallKeyPhrases.keyPhrases;
       createKeyPhraseList(keyPhrases)
-
-      hideSpinner();
-
-      //display content after recieved
-      showTwitterResults();
+<<<<<<< HEAD
+=======
+>>>>>>> 622cb60c295fb8d9c97cac95cba570924b73a8b0
     }
   };
   //TODO: update with prod url
