@@ -28,7 +28,7 @@ function createSentimentChart(sentimentData) {
     var options = {
       title: 'visual ratio between negative and positive sentiment',
       chartArea: {width: '50%'},
-      colors: ['#b0120a', '#ffab91'],
+      'colors': ['#4D971D', '#DC3B30'],
       hAxis: {
         title: 'sentiment percentage',
         minValue: 0
@@ -61,7 +61,8 @@ function createApathyChart(sentimentData) {
     // Set chart options
     var options = {'title':'Consumer Apathy',
                    'width':400,
-                   'height':300};
+                   'height':300,
+                   'colors': ['#4D971D', '#DC3B30', '#F09833', '#3466CC']};
 
     // Instantiate and draw our chart, passing in some options.
     var chart = new google.visualization.PieChart(document.getElementById('apathy-chart'));
