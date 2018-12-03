@@ -12,6 +12,7 @@ function searchTerm() {
 
 function showTwitterResults() {
   document.getElementById('phrase-sentiment-div').classList.add('show');
+  document.getElementById('twitter-charts').classList.add('show');
   var searchTerm = getSearchTerm();
   var searchTermDisplay = document.getElementById('search-term-show');
   searchTermDisplay.innerHTML = searchTerm;
