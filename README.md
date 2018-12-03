@@ -11,5 +11,6 @@ Resources:
 Developer Guide: https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-dg.pdf
 
 Agorize Hacker Platform: https://globalai.agorize.com/en/challenges/openbankinghackathon2018/
-
-https://docs.google.com/document/d/1uwkcLcf-wBzA9Nxcq3Dp_VEf1v-fZF8Rofs3n2nwyHc/edit?usp=sharing
+<<<<<<< HEAD
+=======
+>>>>>>> aced5f5dd52078b55e835ec88d1989eca4b301f9
