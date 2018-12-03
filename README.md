@@ -11,4 +11,3 @@ Resources:
 Developer Guide: https://docs.aws.amazon.com/comprehend/latest/dg/comprehend-dg.pdf
 
 Agorize Hacker Platform: https://globalai.agorize.com/en/challenges/openbankinghackathon2018/
-
