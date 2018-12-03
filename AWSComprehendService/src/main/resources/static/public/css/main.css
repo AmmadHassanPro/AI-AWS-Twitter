@@ -1,4 +1,7 @@
 /*used*/
+body {
+  background-color: #1d1f13; }
+
 header {
   display: flex;
   flex-flow: column;
@@ -28,7 +31,9 @@ header {
   height: 10vh;
   margin: 10px;
   border: 5px groove;
-  border-radius: 10px; }
+  border-radius: 10px;
+  background-color: #b1bedd;
+  color: #121a17; }
   #info-div #search-form {
     width: 25%;
     font-family: sans-serif;
@@ -82,7 +87,9 @@ header {
   border: 5px groove;
   margin: 0px 20px 5px 20px;
   border-radius: 25px;
-  padding: 10px; }
+  padding: 10px;
+  background-color: white;
+  color: #121a17; }
   #phrase-sentiment-div #key-phrases {
     width: 30%;
     height: 300px;
@@ -90,7 +97,8 @@ header {
     flex-direction: column;
     align-items: center;
     border: 3px groove black;
-    border-radius: 10px 10px 0px 0px; }
+    border-radius: 10px 10px 0px 0px;
+    background-color: #95a6b3; }
     #phrase-sentiment-div #key-phrases #key-phrases-list {
       height: 85%;
       width: 100%;
@@ -118,7 +126,9 @@ header {
   justify-content: space-around;
   border: 5px groove;
   margin: 0px 20px 10px 20px;
-  border-radius: 25px; }
+  border-radius: 25px;
+  background-color: white;
+  color: #121a17; }
   #twitter-charts #sentiment-chart {
     width: 90%;
     height: 100%; }
