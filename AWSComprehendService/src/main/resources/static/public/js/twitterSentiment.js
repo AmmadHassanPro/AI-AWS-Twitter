@@ -80,7 +80,7 @@ function populateTwitterData(searchTerm) {
       createApathyChart(sentimentData);
       createSentimentChart(sentimentData);
       var keyPhrases = data.overallKeyPhrases.keyPhrases;
-      createKeyPhraseList(keyPhrases)
+      createKeyPhraseList(keyPhrases);
     }
   };
   //TODO: update with prod url
