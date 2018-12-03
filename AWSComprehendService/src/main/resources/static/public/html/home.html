@@ -6,28 +6,41 @@
     <!--Meyers Reset removes default browser styles -->
     <link href="/public/css/meyerreset.css" rel="stylesheet" type="text/css"/>
     <link href="/public/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Bungee+Inline|Vast+Shadow" rel="stylesheet">
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="/public/js/home.js"></script>
     <script src="/public/js/twitterSentiment.js"></script>
   </head>
   <body>
+
     <header>
-      <h1>insights <small>- realtime high level AI analysis of social media subjects</small></h1>
+      <div class="title">
+        <h1><span id="title-letter-spacing">insight</span>s</h1>
+      </div>
+      <div class="sub-title">
+        <small>realtime high level AI analysis of social media subjects</small>
+      </div>
     </header>
-    <div id="search-form">
-      search term: <input id="term-input" type="text" name="searchString" value="DiscoverCard">
-      <button onclick="searchTerm()">search</button>
+
+    <div id="info-div">
+      <div id="search-form">
+        <fieldset>
+          <legend>search term</legend>
+          <input id="term-input" type="text" name="searchString" value="DiscoverCard">
+          <button onclick="searchTerm()">search</button>
+        </fieldset>
+      </div>
+      <div id="display-search-term">
+        results for the term: <span id="search-term-show"></span><br><br>
+      </div>
+      <div id="display-overall-sentiment">
+        overall sentiment is: <span id="overall-sentiment"></span>
+      </div>
     </div>
-    <div id="display-search-term">
-      results for the term: <span id="search-term"></span><br><br>
-      overall sentiment is: <span id="overall-sentiment"></span>
-    </div>
-    <div id="twitter-charts">
-      <div id="sentiment-chart"></div>
+
+    <div id="phrase-sentiment-div" class="hide-div">
       <div id="apathy-chart"></div>
-    </div>
-    <div id="lists">
       <div id="key-phrases">
         <div class="list-title">
           key phrases
@@ -36,6 +49,19 @@
           <ul id="phrase-ul"></ul>
         </div>
       </div>
+<<<<<<< HEAD
+=======
+    </div>
+
+    <div id="twitter-charts" class="hide-div">
+      <div id="sentiment-chart"></div>
+    </div>
+
+    <div id="loading-modal" class="modal">
+      <div class="modal-content">
+        <img src="public/images/ajax-loader.gif" />
+      </div>
+>>>>>>> 622cb60c295fb8d9c97cac95cba570924b73a8b0
     </div>
   </body>
 </html>

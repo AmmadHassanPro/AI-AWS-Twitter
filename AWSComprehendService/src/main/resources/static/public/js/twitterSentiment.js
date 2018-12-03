@@ -18,21 +18,17 @@ function createSentimentChart(sentimentData) {
   google.charts.setOnLoadCallback(drawBarColors);
 
   function drawBarColors() {
-    var posWithNum = "positive - " + sentimentData.positive;
-    var negWithNum = "negative - " + sentimentData.negative;
+    var posWithNum = "positive: " + sentimentData.positive;
+    var negWithNum = "negative: " + sentimentData.negative;
     var data = google.visualization.arrayToDataTable([
       ['sentiment', posWithNum, negWithNum],
       ['public opinion', sentimentData.positive, sentimentData.negative]
     ]);
 
     var options = {
-      title: 'visual ratio between negative and positive sentiment',
+      title: 'visual comparison between negative and positive sentiment',
       chartArea: {width: '50%'},
-      colors: ['#b0120a', '#ffab91'],
-      hAxis: {
-        title: 'sentiment percentage',
-        minValue: 0
-      },
+      'colors': ['#4D971D', '#DC3B30'],
       vAxis: {
         title: 'sentiment'
       }
@@ -59,9 +55,11 @@ function createApathyChart(sentimentData) {
     ]);
 
     // Set chart options
-    var options = {'title':'Consumer Apathy',
+    var options = {'title':'Apathy Chart: lower neutral % is more opinionated public. Higher neutral % is less opinionated public',
                    'width':400,
-                   'height':300};
+                   'height':300,
+                   'colors': ['#4D971D', '#DC3B30', '#F09833', '#3466CC'],
+                 };
 
     // Instantiate and draw our chart, passing in some options.
     var chart = new google.visualization.PieChart(document.getElementById('apathy-chart'));
@@ -76,13 +74,16 @@ function populateTwitterData(searchTerm) {
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
       data = JSON.parse(this.responseText);
-      //display overall sentiment
+
       document.getElementById("overall-sentiment").innerHTML = data.overallSentiment.sentiment;
       var sentimentData = data.overallSentiment.sentimentScore;
       createApathyChart(sentimentData);
       createSentimentChart(sentimentData);
       var keyPhrases = data.overallKeyPhrases.keyPhrases;
       createKeyPhraseList(keyPhrases)
+<<<<<<< HEAD
+=======
+>>>>>>> 622cb60c295fb8d9c97cac95cba570924b73a8b0
     }
   };
   //TODO: update with prod url
