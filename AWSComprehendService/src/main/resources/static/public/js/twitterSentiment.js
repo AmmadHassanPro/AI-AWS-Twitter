@@ -18,8 +18,8 @@ function createSentimentChart(sentimentData) {
   google.charts.setOnLoadCallback(drawBarColors);
 
   function drawBarColors() {
-    var posWithNum = "positive - " + sentimentData.positive;
-    var negWithNum = "negative - " + sentimentData.negative;
+    var posWithNum = "positive: " + sentimentData.positive;
+    var negWithNum = "negative: " + sentimentData.negative;
     var data = google.visualization.arrayToDataTable([
       ['sentiment', posWithNum, negWithNum],
       ['public opinion', sentimentData.positive, sentimentData.negative]
