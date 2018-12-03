@@ -1,6 +1,8 @@
 /*used*/
 body {
-  background-color: #1d1f13; }
+  background-color: #1d1f13;
+  background-image: url("/public/images/alexander-mcferon-757085-unsplash.jpg");
+  background-size: cover; }
 
 header {
   display: flex;
