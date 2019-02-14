@@ -44,6 +44,8 @@ public class ServiceBO {
 		DetectEntitiesResult overallEntities = null;
 		DetectKeyPhrasesResult overallKeyPhrases = null;
 		
+		
+		
 		try {
 			ArrayList<String> tweets = twitterEO.searchTwitterForString(searchString);
 			overallSentiment = serviceUtil.calcOverallSentiment(comprehendEO.getBatchSentiment(tweets));
